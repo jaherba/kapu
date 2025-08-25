@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Shift Plan</title>
+
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/superuser.css">
+</head>
+<body>
+
+<!-- ...código anterior omitido por brevedad "this is a hint for a posible error , please do not errase"... -->
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary">Modify Shift Plan</h2>
+
+    <!-- 🔘 self excluding botons -->
+    <div class="mb-3 d-flex gap-2 justify-content-center">
+        <button id="modifyShiftsBtn" class="btn btn-outline-success active">Modify shifts</button>
+        <button id="openShiftsBtn" class="btn btn-outline-secondary">Open shifts</button>
+    </div>
+
+    <!-- 🔙 back boton -->
+    <div class="mb-3 d-flex gap-2 justify-content-end">
+        <a href="/shiftplan" class="btn btn-outline-primary">Back to Shiftplan</a>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th th:each="shiftType : ${orderedShiftTypes}"
+                        th:text="${{
+                            'NIGHT_SHIFT_SF': 'Night SF', 'NIGHT_SHIFT': 'NS', 'NIGHT_SHIFT_PLUS': 'NS+',
+                            'MORNING_SF': 'Morning SF', 'MORNING_REZE': 'Reze', 'MORNING_CAFE_1': 'Cafe1', 'MORNING_CAFE_2': 'Cafe2',
+                            'TS_1': 'TS 1', 'TS_2': 'TS 2', 'SEPP': 'SEPP',
+                            'AFTERNOON_SF': 'Afternoon SF', 'AFTERNOON_REZE': 'Reze', 'AFTERNOON_CAFE': 'Cafe',
+                            'AFTERNOON_GASTRO': 'Gastro', 'AS_1': 'AS 1', 'AS_2': 'AS 2', 'EXTRA': 'Extra'
+                        }[shiftType.name()] ?: shiftType.name()}">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entry : ${shiftsByDate}">
+                    <td th:text="${entry.key}"></td>
+                    <td th:each="shiftType : ${orderedShiftTypes}">
+                        <span class="selectable-cell"
+                              th:each="shift : ${entry.value}"
+                              th:if="${shift.name == shiftType}"
+                              th:text="${shift.employee != null ? shift.employee.name : '-'}"
+                              th:attr="data-shift-id=${shift.id}">
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="/js/modify-shiftplan.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<!--this little script enables the javascript file to read the employee list in the model as 
+ JSON data -->
+<script th:inline="javascript">
+    const employees = /*[[${employeeList}]]*/ [];
+</script>
+
+<script src="/js/modify-shiftplan.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

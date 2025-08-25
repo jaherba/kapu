@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shift Swap Preview</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom-styles.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center text-primary">Preview Shift Swap</h2>
+
+    <!-- Toggle -->
+    <div class="d-flex justify-content-center my-3">
+        <a th:href="@{'/swap-preview/' + ${requestId} + '?mode=simplified'}"
+           class="btn btn-outline-secondary mx-2"
+           th:classappend="${mode == 'simplified'} ? 'active' : ''">
+            Simplified
+        </a>
+        <a th:href="@{'/swap-preview/' + ${requestId} + '?mode=normal'}"
+           class="btn btn-outline-secondary mx-2"
+           th:classappend="${mode == 'normal'} ? 'active' : ''">
+            Normal
+        </a>
+    </div>
+    
+    <div class="text-center mt-4">
+    <button class="btn btn-secondary" onclick="goBack()">← Back to Notifications</button>
+</div>
+    
+
+    <!-- Shift Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th th:each="shiftType : ${orderedShiftTypes}"
+                        th:text="${shiftType}">Shift</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entry : ${shiftsByDate}">
+                    <td th:text="${entry.key}"></td>
+                    <td th:each="type : ${orderedShiftTypes}">
+                        <div th:each="shift : ${entry.value}"
+                             th:if="${shift.name.name() == type.name()}"
+                             th:text="${shift.employee != null ? shift.employee.name : '—'}"
+                             th:classappend="${shift.id == fromShiftId || shift.id == toShiftId} ? 'my-shift' : ''">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+
+</body>
+</html>

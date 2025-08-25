@@ -1,0 +1,203 @@
+/* Scroll vertical para la tabla */
+
+
+.table-responsive {
+    max-height: 70vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+/*  sticky header */
+.table thead {
+	
+    position: sticky;
+    top: 0;
+    background-color: #343a40;
+    z-index: 3;
+}
+
+.table thead tr:first-child th {
+    background-color: #343a40;
+    color: white;
+    z-index: 3;
+}
+
+.table thead tr:nth-child(2) th {
+    font-size: 12px;
+    height: 25px;
+    background-color: #495057;
+    color: white;
+    z-index: 3;
+}
+
+/* alterning colours */
+.table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+    background-color: #d6d8db;
+}
+
+/* selectable cells */
+.selectable-cell {
+    cursor: pointer;
+    padding: 4px;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.selectable-cell.selected {
+    background-color: #d1e7dd;
+    border-radius: 4px;
+}
+
+.my-shift {
+    background-color: #198754 !important; /* bootstrap green  */
+    color: white !important;              /* white text*/
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 2px 6px;
+    display: inline-block;
+}
+
+
+/* alert area */
+#shiftplan-alert-area {
+    margin-top: 1rem;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* this afects only screens of less than 768px */
+@media (hover: none) and (pointer: coarse) {
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .table td,
+    .table th,
+    .selectable-cell {
+        font-size: 1.1em;       /* bigger text */
+        padding: 0.8em 0.6em;   /* more space per cell */
+    }
+
+    .table {
+        font-size: 1.05em;      /* augments everything */
+    }
+
+    .mobile-fullscreen-table {
+        width: calc(100vw - 1rem);
+        height: calc(100vh - 1rem);
+        margin: 0.5rem;
+        padding: 0;
+        overflow: auto;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .table-responsive {
+        margin: 0;
+        padding: 0;
+    }
+
+    .notification-btn {
+        font-size: 2.6rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    #hamburgerMenu {
+        font-size: 2.6rem;
+        padding: 1rem 1.6rem;
+    }
+    
+    .dropdown-menu {
+        font-size: 3.2rem;     /* texto más grande */
+        min-width: 12rem;      /* ancho mínimo más amplio */
+        padding: 0.75rem 1rem; /* más espacio interior */
+        
+    }
+
+    .dropdown-item {
+        padding: 0.75rem 1rem; /* más alto cada ítem */
+    }
+
+    .dropdown .dropdown-toggle {
+        margin-left: 0.5rem;
+    }
+
+    .d-flex.justify-content-end {
+        gap: 0.5rem;
+        margin-right: 2rem;
+    }
+    
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* fondo oscurecido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.modal-overlay.d-none {
+    display: none !important;
+}
+
+
+
+
+
+
+

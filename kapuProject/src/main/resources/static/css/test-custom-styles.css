@@ -1,0 +1,53 @@
+/* ensure that the table can be scrolled */
+.table-responsive {
+    max-height: 70vh; /* La tabla ocupa un 70% de la pantalla y permite scroll */
+    overflow-y: auto;
+    position: relative;
+}
+
+/* stick all the heading */
+.table thead {
+    position: sticky;
+    top: 0;
+    background-color: #343a40; 
+    z-index: 3;
+}
+
+/* stick headings first row (Shift Types) */
+.table thead tr:first-child th {
+    background-color: #343a40;
+    color: white;
+    z-index: 3;
+}
+
+/* stick headings second row (Horarios) */
+.table thead tr:nth-child(2) th {
+    font-size: 12px;
+    height: 25px;
+    background-color: #495057; 
+    color: white;
+    z-index: 3;
+}
+
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+}
+
+/* highlight rows when passing over them with the pointer */
+.table tbody tr:hover {
+    background-color: #d6d8db; /* Cambio de color al hacer hover */
+}
